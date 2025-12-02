@@ -24,39 +24,20 @@ class CustomedReplyPromptPlugin(Star):
         except Exception as e: 
             logger.error(f"获取主动回复配置失败: {e}") 
             return False 
-            
+
     @filter.on_llm_request(priority=-10)    # 优先级设为-10，确保在long_term_memory.py之后执行 
-    async def process_user_prompt(self, event: AstrMessageEvent, req: ProviderRequest): 
-        """ 
-        在群聊场景下，当启用主动回复功能时， 
-        存储原始prompt，以便后续long_term_memory.py处理后可以正确替换提示词
-        """ 
-        # 检查是否是群聊消息
-        if event.get_message_type() != MessageType.GROUP_MESSAGE: 
-            logger.debug(f"非群聊消息，跳过提示词预处理")
-            return 
-        
-        # 检查是否启用了主动回复功能
-        if not self._is_active_reply_enabled(event): 
-            logger.debug(f"主动回复功能未启用，跳过提示词预处理")
-            return
-        
-        # 存储原始prompt，以便在后置处理中使用
-        # 使用临时属性存储，避免与现有属性冲突
-        setattr(req, "_original_prompt", req.prompt)
-        logger.debug(f"已存储原始prompt用于后续处理")
-        
-    @filter.on_llm_request(priority=-10)    # 优先级设为-10，确保在long_term_memory.py之后执行 
-    async def replace_reply_prompt(self, event: AstrMessageEvent, req: ProviderRequest):
+    async def replace_reply_prompt(self, event: AstrMessageEvent, req: ProviderRequest, *args, **kwargs):
         """
         在long_term_memory.py处理后，替换主动回复提示词
         """
         # 检查是否是群聊消息
         if event.get_message_type() != MessageType.GROUP_MESSAGE: 
+            logger.debug(f"非群聊消息，跳过主动回复提示词替换")
             return
         
         # 检查是否启用了主动回复功能
         if not self._is_active_reply_enabled(event): 
+            logger.debug(f"主动回复功能未启用，跳过提示词替换")
             return
         
         # 检查是否有原始prompt（说明前置处理已经执行）

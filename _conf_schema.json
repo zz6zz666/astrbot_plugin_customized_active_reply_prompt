@@ -1,0 +1,7 @@
+{
+    "activate_reply_prompt": {
+    "type": "text",
+    "description": "自定义主动回复提示词（为空则保持AstrBot默认）",
+    "default": "请对其进行回应。仅输出你的回复，不得包含其他内容。"
+  }
+}

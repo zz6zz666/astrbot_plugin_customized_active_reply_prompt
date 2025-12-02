@@ -26,7 +26,7 @@ class CustomedReplyPromptPlugin(Star):
             return False 
 
     @filter.on_llm_request(priority=-100)    # 优先级设为-100，确保在long_term_memory处理之后执行 
-    async def replace_reply_prompt(self, event: AstrMessageEvent, req: ProviderRequest, *args, **kwargs):
+    async def replace_reply_prompt(self, event: AstrMessageEvent, req: ProviderRequest):
         """
         在long_term_memory.py处理后，替换主动回复提示词
         """

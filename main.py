@@ -5,8 +5,8 @@ from astrbot.api.platform import MessageType
 from astrbot.api import logger, AstrBotConfig 
 import re 
 
-@register("customed_reply_prompt", "zz6zz666", "自定义群聊主动回复提示词", "1.0.0") 
-class CustomedReplyPromptPlugin(Star): 
+@register("customized_reply_prompt", "zz6zz666", "自定义群聊主动回复提示词", "1.0.0") 
+class CustomizedReplyPromptPlugin(Star): 
     def __init__(self, context: Context, config: AstrBotConfig): 
         super().__init__(context) 
         self.config = config  # AstrBotConfig继承自Dict，可以直接使用字典方法访问 

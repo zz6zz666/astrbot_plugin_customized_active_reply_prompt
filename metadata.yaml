@@ -3,4 +3,4 @@ display_name: 自定义主动回复提示词 # 用于展示的名字，可以是
 desc: AstrBot 框架群聊上下文感知中，主动回复提示词默认不可修改且为英文。本插件可由用户自定义群聊主动回复提示词。 # 插件简短描述
 version: v1.0.0 # 插件版本号
 author: zz6zz666 # 作者
-repo: https://github.com/zz6zz666/astrbot_plugin_customed_active_reply_prompt # 插件的仓库地址
+repo: https://github.com/zz6zz666/astrbot_plugin_customized_active_reply_prompt # 插件的仓库地址
